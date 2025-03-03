@@ -20,10 +20,9 @@ class JobPostingService {
       return ServiceResponse.failure<null>("Failed to retrieve job postings", null, StatusCodes.INTERNAL_SERVER_ERROR);
     }
   }
-
   async createJobPosting(
     jobData: CreateJobPostingType,
-    userId: string,
+    userId: string
   ): Promise<ServiceResponse<JobPostingType | null>> {
     try {
       const jobDataWithId = {
@@ -74,11 +73,13 @@ class JobPostingService {
     }
   }
 
+
   async updateJobPosting(id: string, data: UpdateJobPostingType): Promise<ServiceResponse<JobPostingType | null>> {
     try {
       const jobData = await db
         .update(jobProfile)
         // .set({ ...data, updatedAt: new Date() })
+
         .set({
           ...data,
           expiryDate: data.expiryDate ? new Date(data.expiryDate) : undefined,

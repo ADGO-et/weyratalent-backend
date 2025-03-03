@@ -2,15 +2,15 @@ import { ApiError } from "@/common/models/serviceResponse";
 import { catchAsync } from "@/common/utils/catchAsync.util";
 import { handleServiceResponse } from "@/common/utils/httpHandlers";
 import { jobPostingService } from "@/services/jobPosting.service";
-import type { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
+import type { Request, Response } from "express";
 
 class JobPostingController {
+  
   public createJobPosting = catchAsync(async (req: Request, res: Response) => {
     if (!req.user) {
       throw new ApiError(StatusCodes.NOT_FOUND, "User not found");
     }
-
     const userId = req.user.id;
     const serviceResponse = await jobPostingService.createJobPosting(req.body, userId);
     return handleServiceResponse(serviceResponse, res);
@@ -41,3 +41,4 @@ class JobPostingController {
 }
 
 export const jobPostingController = new JobPostingController();
+
