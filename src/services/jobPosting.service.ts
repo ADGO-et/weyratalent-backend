@@ -19,6 +19,7 @@ class JobPostingService {
       jobRole?: string;
       jobType?: string;
       jobLevel?: string;
+      salaryType?: string;
     },
     pagination?: {
       page?: number;
@@ -38,6 +39,7 @@ class JobPostingService {
       if (filters?.jobRole) whereConditions.push(eq(jobProfile.jobRole, filters.jobRole));
       if (filters?.jobType) whereConditions.push(eq(jobProfile.jobType, filters.jobType));
       if (filters?.jobLevel) whereConditions.push(eq(jobProfile.jobLevel, filters.jobLevel));
+      if (filters?.salaryType) whereConditions.push(eq(jobProfile.salaryType, filters.salaryType));
 
       const jobPostings = await db
         .select()
